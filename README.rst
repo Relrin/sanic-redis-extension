@@ -20,6 +20,7 @@ Example
     from sanic import Sanic, response
     from sanic_redis_ext import RedisExtension
 
+
     app = Sanic(__name__)
     # Configuration for Redis
     app.config.update({
@@ -32,6 +33,7 @@ Example
         "REDIS_MAX_SIZE_POOL": 10
     })
     RedisExtension(app) # Connection pool is available as `app.redis` or `app.extensions['redis']`
+
 
     @app.route("/")
     async def handle(request):
