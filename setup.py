@@ -7,8 +7,8 @@ from setuptools import setup
 
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
 requirements = [
-    'sanic-base-extension==0.1.1',
-    'aioredis==1.2.0',
+    'sanic-base-extension==0.2.0',
+    'redis==4.4.0',
 ]
 
 
@@ -52,9 +52,9 @@ setup(
         'Intended Audience :: Developers',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
 )
