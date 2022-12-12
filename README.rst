@@ -4,7 +4,7 @@ Redis support for Sanic framework
 
 Features
 ========
-- Based on the aioredis_ library
+- Based on the redis_ library
 - Easy to use and configurate for your own projects
 
 Installation
@@ -24,22 +24,18 @@ Example
     app = Sanic(__name__)
     # Configuration for Redis
     app.config.update({
-        "REDIS_HOST": "127.0.0.1"
-        "REDIS_PORT": 6379
-        "REDIS_DATABASE": None
-        "REDIS_SSL": None
-        "REDIS_ENCODING": None
-        "REDIS_MIN_SIZE_POOL": 1
-        "REDIS_MAX_SIZE_POOL": 10
+        "REDIS_HOST": "127.0.0.1",
+        "REDIS_PORT": 6379,
+        "REDIS_DATABASE": 0,
+        "REDIS_MAX_CONNECTIONS": 15,
     })
-    RedisExtension(app) # Connection pool is available as `app.redis` or `app.extensions['redis']`
+    RedisExtension(app) # Connection pool is available as `app.ctx.redis` or `app.ctx.extensions['redis']`
 
 
     @app.route("/")
     async def handle(request):
-        with await request.app.redis as redis:
-            await redis.set('test-my-key', 'value')
-            val = await redis.get('test-my-key')
+        await request.app.ctx.redis.set('test-my-key', 'value')
+        val = await request.app.ctx.redis.get('test-my-key')
         return response.text(val.decode('utf-8'))
 
 License
@@ -47,5 +43,5 @@ License
 The sanic-redis-extension is published under BSD license. For more details read LICENSE_ file.
 
 .. _links:
-.. _aioredis: http://aioredis.readthedocs.io/
+.. _redis: https://redis.readthedocs.io/
 .. _LICENSE: https://github.com/Relrin/sanic-redis-extension/blob/master/LICENSE
